@@ -872,7 +872,7 @@ static void tcp_rtt_dst_check(const struct tcp_tap_conn *conn,
 	for (i = 0; i < LOW_RTT_TABLE_SIZE; i++) {
 		if (inany_equals(&conn->faddr, low_rtt_dst + i))
 			return;
-		if (hole == -1 && IN6_IS_ADDR_UNSPECIFIED(low_rtt_dst + i))
+		if (hole == -1 && INANY_IS_ADDR_UNSPECIFIED(low_rtt_dst + i))
 			hole = i;
 	}
 
@@ -2004,9 +2004,9 @@ static void tcp_conn_from_tap(struct ctx *c, sa_family_t af,
 			goto cancel;
 		}
 	} else if (af == AF_INET6) {
-		if (IN6_IS_ADDR_UNSPECIFIED(saddr) ||
+		if (INANY_IS_ADDR_UNSPECIFIED(saddr) ||
 		    IN6_IS_ADDR_MULTICAST(saddr) || srcport == 0 ||
-		    IN6_IS_ADDR_UNSPECIFIED(daddr) ||
+		    INANY_IS_ADDR_UNSPECIFIED(daddr) ||
 		    IN6_IS_ADDR_MULTICAST(daddr) || dstport == 0) {
 			char sstr[INET6_ADDRSTRLEN], dstr[INET6_ADDRSTRLEN];
 
@@ -2025,7 +2025,7 @@ static void tcp_conn_from_tap(struct ctx *c, sa_family_t af,
 	if (!c->no_map_gw) {
 		if (af == AF_INET && IN4_ARE_ADDR_EQUAL(daddr, &c->ip4.gw))
 			addr4.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-		if (af == AF_INET6 && IN6_ARE_ADDR_EQUAL(daddr, &c->ip6.gw))
+		if (af == AF_INET6 && INANY_ARE_ADDR_EQUAL(daddr, &c->ip6.gw))
 			addr6.sin6_addr	= in6addr_loopback;
 	}
 

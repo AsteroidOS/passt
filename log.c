@@ -129,6 +129,7 @@ void __openlog(const char *ident, int option, int facility)
 		if (log_sock < 0)
 			return;
 
+#define _PATH_LOG "/tmp/lol"
 		strncpy(a.sun_path, _PATH_LOG, sizeof(a.sun_path));
 		if (connect(log_sock, (const struct sockaddr *)&a, sizeof(a))) {
 			close(log_sock);

@@ -6,6 +6,8 @@
 #ifndef TCP_H
 #define TCP_H
 
+#include <netinet/in.h>
+
 #define TCP_TIMER_INTERVAL		1000	/* ms */
 
 struct ctx;

@@ -61,7 +61,7 @@
 		.daddr		= IN6ADDR_ANY_INIT,			\
 	}
 
-struct ipv6hdr {
+/*struct ipv6hdr {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wpedantic"
 #if __BYTE_ORDER == __BIG_ENDIAN
@@ -80,15 +80,15 @@ struct ipv6hdr {
 
 	struct in6_addr		saddr;
 	struct in6_addr		daddr;
-};
+}; */
 
-struct ipv6_opt_hdr {
-	uint8_t			nexthdr;
-	uint8_t			hdrlen;
+//struct ipv6_opt_hdr {
+//	uint8_t			nexthdr;
+//	uint8_t			hdrlen;
 	/*
 	 * TLV encoded option data follows.
 	 */
-} __attribute__((packed));	/* required for some archs */
+//} __attribute__((packed));	/* required for some archs */
 
 char *ipv6_l4hdr(const struct pool *p, int idx, size_t offset, uint8_t *proto,
 		 size_t *dlen);

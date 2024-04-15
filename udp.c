@@ -893,13 +893,13 @@ int udp_tap_handler(struct ctx *c, uint8_t pif,
 		sa = (struct sockaddr *)&s_in6;
 		sl = sizeof(s_in6);
 
-		if (IN6_ARE_ADDR_EQUAL(daddr, &c->ip6.dns_match) &&
+		if (INANY_ARE_ADDR_EQUAL(daddr, &c->ip6.dns_match) &&
 		    ntohs(s_in6.sin6_port) == 53) {
 			s_in6.sin6_addr = c->ip6.dns_host;
 			udp_tap_map[V6][src].ts = now->tv_sec;
 			udp_tap_map[V6][src].flags |= PORT_DNS_FWD;
 			bitmap_set(udp_act[V6][UDP_ACT_TAP], src);
-		} else if (IN6_ARE_ADDR_EQUAL(daddr, &c->ip6.gw) &&
+		} else if (INANY_ARE_ADDR_EQUAL(daddr, &c->ip6.gw) &&
 			   !c->no_map_gw) {
 			if (!(udp_tap_map[V6][dst].flags & PORT_LOCAL) ||
 			    (udp_tap_map[V6][dst].flags & PORT_LOOPBACK))

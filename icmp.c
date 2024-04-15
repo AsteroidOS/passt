@@ -26,6 +26,7 @@
 #include <sys/epoll.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <inttypes.h>
 #include <unistd.h>
 #include <time.h>
 

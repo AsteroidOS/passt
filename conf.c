@@ -1675,15 +1675,15 @@ void conf(struct ctx *c, int argc, char **argv)
 	else
 		__setlogmask(LOG_UPTO(LOG_INFO));
 
-	nl_sock_init(c, false);
-	if (!v6_only)
-		c->ifi4 = conf_ip4(ifi4, &c->ip4, c->mac);
-	if (!v4_only)
-		c->ifi6 = conf_ip6(ifi6, &c->ip6, c->mac);
-	if ((!c->ifi4 && !c->ifi6) ||
-	    (*c->ip4.ifname_out && !c->ifi4) ||
-	    (*c->ip6.ifname_out && !c->ifi6))
-		die("External interface not usable");
+	// nl_sock_init(c, false);
+//	if (!v6_only)
+//		c->ifi4 = conf_ip4(ifi4, &c->ip4, c->mac);
+//	if (!v4_only)
+//		c->ifi6 = conf_ip6(ifi6, &c->ip6, c->mac);
+//	if ((!c->ifi4 && !c->ifi6) ||
+//	    (*c->ip4.ifname_out && !c->ifi4) ||
+//	    (*c->ip6.ifname_out && !c->ifi6))
+//		die("External interface not usable");
 
 	if (c->ifi4 && IN4_IS_ADDR_UNSPECIFIED(&c->ip4.gw))
 		c->no_map_gw = c->no_dhcp = 1;
@@ -1708,7 +1708,7 @@ void conf(struct ctx *c, int argc, char **argv)
 	else if (optind != argc)
 		die("Extra non-option argument: %s", argv[optind]);
 
-	isolate_user(uid, gid, !netns_only, userns, c->mode);
+	// isolate_user(uid, gid, !netns_only, userns, c->mode);
 
 	if (c->pasta_conf_ns)
 		c->no_ra = 1;
@@ -1751,9 +1751,9 @@ void conf(struct ctx *c, int argc, char **argv)
 
 	if (!*c->pasta_ifn) {
 		if (c->ifi4)
-			if_indextoname(c->ifi4, c->pasta_ifn);
+            strcpy(c->pasta_ifn, "lo");
 		else
-			if_indextoname(c->ifi6, c->pasta_ifn);
+            strcpy(c->pasta_ifn, "lo");
 	}
 
 	if (!c->tcp.fwd_in.mode)
@@ -1769,4 +1769,7 @@ void conf(struct ctx *c, int argc, char **argv)
 
 	if (!c->quiet)
 		conf_print(c);
+
+    c->ifi4 = 1;
+    c->ifi6 = 1;
 }

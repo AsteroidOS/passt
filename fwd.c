@@ -20,6 +20,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#include <netinet/in.h>
+
 #include "util.h"
 #include "ip.h"
 #include "fwd.h"

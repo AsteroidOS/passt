@@ -123,6 +123,14 @@ extern char *epoll_type_str[];
 
 #include <resolv.h>	/* For MAXNS below */
 
+#ifndef MAXNS
+#define MAXNS 3
+#endif
+
+#ifndef MAXSNSRCH
+#define MAXDNSRCH 6
+#endif
+
 /**
  * struct fqdn - Representation of fully-qualified domain name
  * @n:		Domain name string

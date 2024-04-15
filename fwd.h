@@ -7,6 +7,8 @@
 #ifndef FWD_H
 #define FWD_H
 
+#include <netinet/in.h>
+
 /* Number of ports for both TCP and UDP */
 #define	NUM_PORTS	(1U << 16)
 

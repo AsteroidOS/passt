@@ -49,6 +49,7 @@
 #include <arpa/inet.h>
 #include <netinet/ip.h>
 #include <netinet/tcp.h>
+#include <netinet/udp.h>
 #include <netinet/ip_icmp.h>
 #include <stddef.h>
 #include <stdint.h>

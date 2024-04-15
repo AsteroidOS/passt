@@ -6,6 +6,8 @@
 #ifndef UDP_H
 #define UDP_H
 
+#include <netinet/in.h>
+
 #define UDP_TIMER_INTERVAL		1000 /* ms */
 
 void udp_portmap_clear(void);

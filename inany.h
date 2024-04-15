@@ -184,4 +184,16 @@ static inline void inany_siphash_feed(struct siphash_state *state,
 
 const char *inany_ntop(const union inany_addr *src, char *dst, socklen_t size);
 
+#define INANY_IS_ADDR_UNSPECIFIED(a) \
+	(((const uint32_t *) (a))[0] == 0				      \
+	 && ((const uint32_t *) (a))[1] == 0				      \
+	 && ((const uint32_t *) (a))[2] == 0				      \
+	 && ((const uint32_t *) (a))[3] == 0)
+
+# define INANY_ARE_ADDR_EQUAL(a,b) \
+	((((const uint32_t *) (a))[0] == ((const uint32_t *) (b))[0])	      \
+	 && (((const uint32_t *) (a))[1] == ((const uint32_t *) (b))[1])      \
+	 && (((const uint32_t *) (a))[2] == ((const uint32_t *) (b))[2])      \
+	 && (((const uint32_t *) (a))[3] == ((const uint32_t *) (b))[3]))
+
 #endif /* INANY_H */

@@ -32,6 +32,7 @@
 #include <string.h>
 #include <errno.h>
 #include <time.h>
+#include <libgen.h>
 #include <syslog.h>
 #include <sys/prctl.h>
 #include <netinet/if_ether.h>
@@ -209,7 +210,7 @@ int main(int argc, char **argv)
 
 	arch_avx2_exec(argv);
 
-	isolate_initial();
+	// isolate_initial();
 
 	c.pasta_netns_fd = c.fd_tap = c.fd_tap_listen = -1;
 
@@ -308,8 +309,8 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if (isolate_prefork(&c))
-		die("Failed to sandbox process, exiting");
+	// if (isolate_prefork(&c))
+    //	die("Failed to sandbox process, exiting");
 
 	if (!c.force_stderr && !isatty(fileno(stderr)))
 		__openlog(log_name, 0, LOG_DAEMON);
@@ -322,7 +323,7 @@ int main(int argc, char **argv)
 	if (pasta_child_pid)
 		kill(pasta_child_pid, SIGUSR1);
 
-	isolate_postfork(&c);
+	// isolate_postfork(&c);
 
 	timer_init(&c, &now);
 
